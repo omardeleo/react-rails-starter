@@ -14,6 +14,6 @@ RUN bundle install
 
 COPY . /srv
 # RUN bin/rails assets:precompile
-EXPOSE 3000
+EXPOSE 8080
 
 CMD ["rails", "server", "-b", "0.0.0.0"]
