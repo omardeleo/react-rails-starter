@@ -7,13 +7,15 @@ build-base curl-dev git postgresql-dev \
 yaml-dev zlib-dev nodejs yarn
 
 WORKDIR /srv
-# ENV RAILS_ENV=production
 
 COPY Gemfile* /srv/
 RUN bundle install
 
 COPY . /srv
-# RUN bin/rails assets:precompile
+
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["sh", "entrypoint.sh"]
 EXPOSE 8080
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-p", "8080", "-b", "0.0.0.0"]
